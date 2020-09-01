@@ -36,7 +36,7 @@ if (sizeof($request_array['events']) > 0 ) {
             'to' => $event['source']['userId'],            
             'messages' => [['type' => 'text', 'text' => 'Korn Test' ]]
         ];
-        $post_body2 = json_encode($data, JSON_UNESCAPED_UNICODE);
+        $post_body2 = json_encode($data2, JSON_UNESCAPED_UNICODE);
         
         $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
         $send_result = pushMsg($POST_HEADER, $post_body2);

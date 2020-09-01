@@ -27,8 +27,8 @@ if (sizeof($request_array['events']) > 0 ) {
         $text = $event['message']['text'];
         $data = [
             'replyToken' => $reply_token,
-            'messages' => [['type' => 'text', 'text' => json_encode($request_array) ]]   //Debug Detail message
-            //'messages' => [['type' => 'text', 'text' => $text ]]
+            //'messages' => [['type' => 'text', 'text' => json_encode($request_array) ]]   //Debug Detail message
+            'messages' => [['type' => 'text', 'text' => $event['source']['userId']]
         ];
         $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
         
@@ -38,8 +38,8 @@ if (sizeof($request_array['events']) > 0 ) {
         ];
         $post_body2 = json_encode($data2, JSON_UNESCAPED_UNICODE);
         
-        //$send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-        $send_result = pushMsg($POST_HEADER, $post_body2);
+        $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+        //$send_result = pushMsg($POST_HEADER, $post_body2);
         
         echo "Result: ".$send_result."\r\n";
     }

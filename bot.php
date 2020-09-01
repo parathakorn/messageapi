@@ -31,9 +31,16 @@ if (sizeof($request_array['events']) > 0 ) {
             //'messages' => [['type' => 'text', 'text' => $text ]]
         ];
         $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-
+        
+        $data2 = [
+            'replyToken' => $reply_token,            
+            'messages' => [['type' => 'text', 'text' => 'Korn Test' ]]
+        ];
+        $post_body2 = json_encode($data, JSON_UNESCAPED_UNICODE);
+        
         $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-
+        $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body2);
+        
         echo "Result: ".$send_result."\r\n";
     }
 }

@@ -39,7 +39,7 @@ if (sizeof($request_array['events']) > 0 ) {
         $post_body2 = json_encode($data, JSON_UNESCAPED_UNICODE);
         
         $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-        $send_result = send_reply_message($API_URL.'/push', $POST_HEADER, $post_body2);
+        $send_result = pushMsg($POST_HEADER, $post_body2);
         
         echo "Result: ".$send_result."\r\n";
     }
@@ -61,6 +61,20 @@ function send_reply_message($url, $post_header, $post_body)
     curl_close($ch);
 
     return $result;
+}
+
+function pushMsg($arrayHeader,$arrayPostData){
+      $strUrl = "https://api.line.me/v2/bot/message/push";
+      $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL,$strUrl);
+      curl_setopt($ch, CURLOPT_HEADER, false);
+      curl_setopt($ch, CURLOPT_POST, true);
+      curl_setopt($ch, CURLOPT_HTTPHEADER, $arrayHeader);
+      curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($arrayPostData));
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER,true);
+      curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+      $result = curl_exec($ch);
+      curl_close ($ch);
 }
 
 ?>
